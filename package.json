@@ -1,0 +1,26 @@
+{
+  "name": "sample-mcp-server",
+  "version": "0.1.14",
+  "description": "Code generation MCP server based on the user query",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "sample-mcp-server": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc",
+    "watch": "tsc --watch",
+    "inspector": "npx @modelcontextprotocol/inspector dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.21.1"
+  },
+  "devDependencies": {
+    "@types/node": "24",
+    "typescript": "5.9.3"
+  }
+}
