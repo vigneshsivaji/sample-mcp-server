@@ -1,12 +1,23 @@
-# Use a lightweight Node.js base image
+# Use official Node.js LTS image
 FROM node:20-alpine
 
 # Set working directory
 WORKDIR /app
 
-# Install the MCP server package globally for faster startup (optional but recommended)
-RUN npm install -g sample-mcp-server@latest
+# Copy package files
+COPY package*.json ./
+COPY tsconfig.json ./
 
-# Expose stdio (Docker handles this implicitly with -i -t flag)
-# Run the server via npx (fallback if not installed globally)
-CMD ["npx", "-y", "sample-mcp-server@latest"]
+# Install dependencies
+RUN npm install
+
+# Copy source code
+COPY src ./src
+
+# Build TypeScript
+RUN npm run build
+
+# Expose nothing (stdio, no port)
+
+# Run the MCP server
+CMD ["node", "dist/index.js"]
